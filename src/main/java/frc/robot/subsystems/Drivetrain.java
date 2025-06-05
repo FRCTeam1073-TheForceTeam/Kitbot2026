@@ -14,12 +14,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
   // Declares the motors' variables
-  
+  private Spark leftMotorLeader;
+  private Spark rightMotorLeader;
+  private Spark leftMotorFollower;
+  private Spark rightMotorFollower;
 
   /** Creates a new Drivetrain. */
   public Drivetrain() {
     // Initializes the motors to Spark motor objects with pwm channels corresponding to where they're plugged in on the robot
-    
+    rightMotorLeader = new Spark(0);
+    rightMotorFollower = new Spark(1);
+    leftMotorLeader = new Spark(2);
+    leftMotorFollower = new Spark(3);
   }
 
   /* Called once per scheduler run */
@@ -32,7 +38,12 @@ public class Drivetrain extends SubsystemBase {
   public void setPower(double leftPower, double rightPower)
   {
     // The leader and follower *must* be set to the same value because they're physically connected on the robot
-    
-    
+    leftMotorLeader.set(-leftPower * 0.5);
+    leftMotorFollower.set(-leftPower * 0.5);
+    rightMotorLeader.set(rightPower * 0.5);
+    rightMotorFollower.set(rightPower * 0.5);
+
+    SmartDashboard.putNumber("Right Power", rightPower);
+    SmartDashboard.putNumber("Left Power", leftPower);
   }
 }
