@@ -40,10 +40,10 @@ public class OI extends SubsystemBase {
 
   public void zeroDriverController() {
     //Sets all the offsets to zero, then uses whatever value it returns as the new offset.
-    // LEFT_X_ZERO = 0;
-    // LEFT_Y_ZERO = 0;
-    // RIGHT_X_ZERO = 0;
-    // RIGHT_Y_ZERO = 0;
+    LEFT_X_ZERO = 0;
+    LEFT_Y_ZERO = 0;
+    RIGHT_X_ZERO = 0;
+    RIGHT_Y_ZERO = 0;
     // LEFT_X_ZERO = getDriverLeftX();
     // LEFT_Y_ZERO = getDriverLeftY();
     // RIGHT_X_ZERO = getDriverRightX();
@@ -54,6 +54,21 @@ public class OI extends SubsystemBase {
   public double getDriverLeftX() {
     // "Clamping" the value makes sure that it's still between 1 and -1 even if we have added an offset to it
     return MathUtil.clamp(driverController.getRawAxis(0) - LEFT_X_ZERO, -1, 1);
+  }
+
+  public double getDriverLeftY() {
+    // "Clamping" the value makes sure that it's still between 1 and -1 even if we have added an offset to it
+    return MathUtil.clamp(driverController.getRawAxis(1) - LEFT_Y_ZERO, -1, 1);
+  }
+
+  public double getDriverRightX() {
+    // "Clamping" the value makes sure that it's still between 1 and -1 even if we have added an offset to it
+    return MathUtil.clamp(driverController.getRawAxis(4) - RIGHT_X_ZERO, -1, 1);
+  }
+
+  public double getDriverRightY() {
+    // "Clamping" the value makes sure that it's still between 1 and -1 even if we have added an offset to it
+    return MathUtil.clamp(driverController.getRawAxis(5) - RIGHT_Y_ZERO, -1, 1);
   }
 
   /** Returns a specified button from the driver controller */
